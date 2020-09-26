@@ -1,0 +1,8 @@
+export const INCREMENT = 'INCREMENT'
+export const DECREMENT = 'DECREMENT'
+export const INCREMENT_ASYNC = 'INCREMENT_ASYNC'
+
+
+export const FETCH_USERS = 'FETCH_USERS'
+
+export const FETCH_TODOS = 'FETCH_TODOS'
