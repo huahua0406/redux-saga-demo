@@ -6,12 +6,12 @@ export const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 function* incrementAsync() {
 	// 延迟 1s 在执行 + 1操作
 	yield call(delay, 1000)
-	yield put({ type: 'INCREMENT_ASYNC' })
+	// yield put({ type: 'INCREMENT_ASYNC' })
 }
 
 export default function* counterSaga() {
     console.log('counter sage running')
-    // 监听一个type为 'FETCH_REQUESTED' 的action的执行，直到等到这个Action被触发，才会接着执行下面的 yield fork(fetchData) 语句
+    // 监听一个type为 'INCREMENT_ASYNC' 的action的执行，直到等到这个Action被触发，才会接着执行下面的 yield fork(fetchData) 语句
 	// while (true) {
 	// 	yield take('INCREMENT_ASYNC')
 	// 	yield fork(incrementAsync)

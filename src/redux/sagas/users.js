@@ -1,5 +1,4 @@
-import { call, takeEvery, put, fork } from 'redux-saga/effects';
-import { delay } from 'redux-saga';
+import { call, takeEvery, takeLatest, put, fork, delay } from 'redux-saga/effects';
 import axios from 'axios'
 
 // import Api from '...'
@@ -12,8 +11,7 @@ function* fetchUsers() {
 	try {
         // 需要执行异步的时候，直接调用 call
         const users = yield call(axios.get, 'https://jsonplaceholder.typicode.com/users') // axios.get('https://jsonplaceholder.typicode.com/users')
-        console.log(users)
-		yield put({ type: 'FETCH_SUCESS', data: users })
+		yield put({ type: 'FETCH_USERS', data: users })
 	} catch (e) {
 		yield put({ type: 'FETCH_FAIL', errors: e })
 	}
@@ -21,8 +19,10 @@ function* fetchUsers() {
 
 
 function* user() {
-    console.log('FETCH_USERS====')
-    yield takeEvery('FETCH_USERS', fetchUsers); // 正在加载数据
+    console.log('FETCH_USERS')
+    // 监听 FETCH_USERS action
+    yield takeEvery('FETCH_USERS', fetchUsers);
+    // yield takeLatest('FETCH_USERS', fetchUsers);
 }
  
 // 使用数组导出
