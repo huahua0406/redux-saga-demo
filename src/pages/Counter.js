@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { increment, incrementAsync, decrement, fetchUsers } from '../redux/actions'
+import { increment, incrementAsync, incrementAsyncOnce, decrement, fetchRequest } from '../redux/actions'
 
 class Counter extends Component {
 	constructor(props) {
@@ -21,34 +21,30 @@ class Counter extends Component {
 			<div>
 				{/* 触发dispatch，发送对应的action */}
 				<div style={{ marginBottom: 20 }}>
-					<p>counter: {this.props.counter}</p>
+					<h1>counter: {this.props.counter}</h1>
 					<button onClick={() => this.props.increment()}>新增+1</button>
                     &nbsp;&nbsp;&nbsp;
                     <button onClick={() => this.props.increment()}>新增-1</button>
 					&nbsp;&nbsp;&nbsp;
-					<button onClick={() => this.props.incrementAsync()}>异步新增+2</button>
+					<button onClick={() => this.props.incrementAsync()}>异步新增+1(takeEvery)</button>
 					&nbsp;&nbsp;&nbsp;
-					<button onClick={() => this.props.fetchUsers()}>axios请求users</button>
+                    <button onClick={() => this.props.incrementAsyncOnce()}>异步新增+1(takeLatest)</button>
+					&nbsp;&nbsp;&nbsp;
+					<button onClick={() => this.props.fetchRequest()}>axios请求users</button>
 				</div>
-				{/* <h2>{data}</h2> */}
 			</div>
 		)
 	}
 }
 
-// const mapDispatchToProps = (dispatch) => {
-// 	return {
-// 		increate: () => {
-// 			dispatch(increate())
-// 		}
-// 	}
-// }
-
+// mapStateToProps，在 reducers/index.js 中，通过 connect 导入对应的 state
+// { increate, increateAsync } ,通过 connect 导入对应的action，在view触发相应的action
 const mapStateToProps = (state) => {
 	return {
 		counter: state.counter, // state 对应的 key, 在 reducers/index.js 中声明。
 		users: state.users
 	}
 }
-// export default Counter;
-export default connect(mapStateToProps, {increment, decrement, incrementAsync, fetchUsers})(Counter)
+export default connect(mapStateToProps, {increment, decrement, incrementAsync, incrementAsyncOnce, fetchRequest})(Counter)
+
+

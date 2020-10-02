@@ -1,14 +1,11 @@
-import { INCREMENT, DECREMENT, INCREMENT_ASYNC} from '../constants';
-
+import * as actionTypes from '../constants';
 
 export default function counter(state = 0, action) {
 	switch (action.type) {
-		case INCREMENT:
+		case actionTypes.INCREMENT:
 			return state + 1
-		case DECREMENT:
+		case actionTypes.DECREMENT:
 			return state - 1
-		case INCREMENT_ASYNC:
-			return state + 2
 		default:
 			return state
 	}
